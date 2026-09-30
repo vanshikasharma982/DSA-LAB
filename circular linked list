@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+int main() {
+    struct Node *head, *second, *third;
+
+    // Allocate memory
+    head = malloc(sizeof(struct Node));
+    second = malloc(sizeof(struct Node));
+    third = malloc(sizeof(struct Node));
+
+    // Store data and connect nodes
+    head->data = 10;
+    head->next = second;
+
+    second->data = 20;
+    second->next = third;
+
+    third->data = 30;
+    third->next = head;   // Makes the list circular
+
+    // Display circular linked list
+    struct Node *temp = head;
+
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+
+    free(third);
+    free(second);
+    free(head);
+
+    return 0;
+}
